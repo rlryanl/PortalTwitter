@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+    font-family: 'Roboto';
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    border-bottom: #1DA1F2;
+    color: #1DA1F2;
+}
+
+body {
+    background-color: rgb(245, 245, 245);
+}
+
+.card {
+    height: 200px;
+    width: inherit;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.container {
+    margin-left: 150px;
+    margin-top: 10px;
+}
+
+.navbar{
+    background-color: white !important;
+    border-bottom: solid 0.5px rgb(160, 160, 160);
+    padding: 5px;
+}
+
+.navbar-nav {
+    margin-left: 150px;
+}
+
+.nav-link {
+    border-bottom: solid 1px inherit;
+    color: #66757f !important;
+    margin-right: 10px !important;
+}
+
+.nav-link:hover {
+    color: #1DA1F2 !important;
+}
+
+.profilecardtop {
+    background-color: #1DA1F2;
+    height: 100px; 
+}
+
+.profilelink {
+    color: black;
+    text-align: center;
+}
+
+.tweetcontainer {
+    background-color: rgb(255, 255, 255);
+    padding: 10px 10px;
+}
+
+.tweetheader {
+    margin-bottom: 5px;
+}
+
+.followerslink {
+    color: rgb(115, 115, 115);
+}
+
+.tweetslink {
+    color: rgb(115, 115, 115);
+}
+
+.tweethandle {
+    color: rgb(115, 115, 115);
+    display: inline;
+}
+
+.writetweetcontainer {
+    background-color: rgb(155, 217, 255);
+    height: 110px;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+.writetweetsection {
+    border-radius: 5px;
+    resize: none;
+    width: 100%;
+}
+
+.writetweetsection:
+
+.submittweetbutton {
+    float: right;
+}
