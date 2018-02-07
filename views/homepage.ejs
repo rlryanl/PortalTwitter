@@ -7,21 +7,26 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                    <a class="nav-link custom" href="#"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link custom" href="#"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link custom" href="#"><i class="fas fa-bolt"></i> Moments</a>
-                    </li>
-                    <a class="nav-link custom" href="#"><i class="fas fa-bell"></i> Notifications</a>
-                    </li>
-                    <a class="nav-link custom" href="#"><i class="fas fa-envelope"></i> Messages</a>
+                        <a class="nav-link custom" href="#"><i class="fas fa-bolt"></i> Moments</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link custom" href="#"><i class="fas fa-bell"></i> Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom" href="#"><i class="fas fa-envelope"></i> Messages</a>
+                    </li>
                 </ul>
+
+                <button class="loginbtn" href="#">Login</button>
+                <!--
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+                -->
                 </div>
             </nav>
             <div class="container">
@@ -52,7 +57,7 @@
                             </div>
                             <div class="tweettextboxcol">
                                 <textarea class="writetweetsection" rows="2" placeholder=" Write something!"></textarea>
-                                <button class="submittweetbutton" type="submit">Tweet</button>
+                                <button class="submittweetbtn" type="submit">Tweet</button>
                             </div>
                         </div>
                         <div class="tweetsection">
@@ -65,7 +70,36 @@
                                         <a class="tweetusername" href="">Steve Mcgee</a>
                                         <span> </span>
                                         <div class="tweethandle">@mcgee</div>
-                                    <div class="tweet">Steve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guy</div>
+                                        <div class="tweet">Steve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guy</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tweetcontainer">
+                                <div class="tweetpiccol">
+                                    <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
+                                </div>
+                                <div class="tweetheadercol">
+                                    <div class="tweetheader">
+                                        <a class="tweetusername" href="">Steve Mcgee</a>
+                                        <span> </span>
+                                        <div class="tweethandle">@mcgee</div>
+                                        <div class="tweet">Steve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guy</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tweetcontainer">
+                                <div class="tweetpiccol">
+                                    <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
+                                </div>
+                                <div class="tweetheadercol">
+                                    <div class="tweetheader">
+                                        <a class="tweetusername" href="">Steve Mcgee</a>
+                                        <span> </span>
+                                        <div class="tweethandle">@mcgee</div>
+                                        <div class="tweet">Steve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guy</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -73,4 +107,36 @@
                     <div class="col-md-2"></div>
                 </div>
             </div>
+
+            <div class="modalcontainer hidden">
+                <div class="modalbackground"></div>
+                <div class="logincontainer">
+                    <button class="closemodalbtn">X</button>
+                    <form>
+                        <div class="loginhdng">Login</div><br>
+                        <label class="loginhdng2">Username:</label><br>
+                        <input type="username" placeholder="Username" name="username" class="logininput"><br>
+                        <label class="loginhdng2">Password:</label><br>
+                        <input type="password" placeholder="Password" name="password" class="logininput"><br>
+                        <input type="submit" value="Sign In" class="loginsbmtbtn"><br>
+                    </form>
+                </div>
+
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $('.loginbtn').on('click', function() {
+                        $('.modalcontainer').attr('class', 'modalcontainer');
+                    });
+
+                    $('.modalcontainer').on('click', '.modalbackground', function(event) {
+                        $('.modalcontainer').addClass('hidden');
+                    });
+
+                    $('.closemodalbtn').on('click', function(event) {
+                        $('.modalcontainer').addClass('hidden');
+                    });
+                });
+            </script> 
 <% include homepagefooter %>

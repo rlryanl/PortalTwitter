@@ -33,6 +33,131 @@ body {
     margin-top: 10px;
 }
 
+/* Login Styling */
+.loginbtn {
+    background-color: rgb(91, 189, 250);
+    border: solid 1px rgb(122, 204, 255);
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 600;
+    height: 30px;
+    margin-right: 20px;
+    width: 60px;
+}
+
+.loginbtn:hover {
+    cursor: pointer;
+    background-color: rgb(136, 209, 255);
+    border: solid 1px rgb(199, 233, 255);
+}
+
+.loginbtn:focus {
+    outline: 0;
+}
+
+.logincontainer {
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    height: 320px;
+    width: 400px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    position: fixed;
+}
+
+.loginhdng {
+    border-bottom: 2px solid rgb(220, 220, 220);
+    color: #1DA1F2;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.loginhdng2 {
+    color: #1DA1F2;
+}
+
+.logininput {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 3px;
+    font-size: 16px;
+    margin-bottom: 13px;
+    padding: 8px 10px;
+}
+
+.logininput::placeholder {
+    color: rgb(126, 126, 126);
+}
+
+.loginsbmtbtn {
+    background-color: #FFFFFF;
+    border: solid 1px #1DA1F2;
+    border-radius: 10px;
+    color: #1DA1F2;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 5px 0px;
+    padding: 4px 8px;
+
+}
+
+.loginsbmtbtn:hover {
+    cursor: pointer;
+    background-color: rgb(136, 209, 255);
+    border: solid 1px rgb(199, 233, 255);
+}
+
+.loginsbmtbtn:focus {
+    outline: 0;
+}
+
+/* */
+
+/*  Modal Styling */
+.hidden {
+    display: none;
+}
+
+.closemodalbtn {
+    background-color: #FFFFFF;
+    border: none;
+    color: rgb(100, 100, 100);
+    float: right;
+    font-size: 22px;
+    font-weight: 700;
+    outline: none;
+}
+
+.closemodalbtn:hover {
+    cursor: pointer;
+}
+
+.closemodalbtn:focus {
+    outline: 0;
+}
+
+.modalbackground {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.modalcontainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: rgba(31, 31, 31, 0.5);
+}
+/* */
+
+/* Navbar Styling */
 .navbar{
     background-color: white !important;
     border-bottom: solid 0.5px rgb(160, 160, 160);
@@ -54,6 +179,9 @@ body {
     color: #1DA1F2 !important;
 }
 
+/* */
+
+/* Profile Card Styling */
 .profilebody {
     background: #FFFFFF;
     text-align: center;
@@ -96,14 +224,17 @@ body {
     height: 80px;
     width: 80px;
     left: 50%;
-    top: 15%;
+    top: 40px;
     transform: translate(-50%, 0%);
     position: absolute;
 }
 
+/* */
+
 .tweetcontainer {
     background-color: rgb(255, 255, 255);
     border: 1px solid #e6ecf0;
+    margin-bottom: 5px;
     padding-right: 10px;
     padding-top: 10px;
 }
@@ -199,7 +330,7 @@ body {
     color: #1DA1F2;
 }
 
-.submittweetbutton {
+.submittweetbtn {
     float: right;
     background-color: rgb(91, 189, 250);
     border: solid 1px rgb(122, 204, 255);
@@ -212,12 +343,12 @@ body {
     width: 65px;
 }
 
-.submittweetbutton:hover {
+.submittweetbtn:hover {
     cursor: pointer;
     background-color: rgb(136, 209, 255);
     border: solid 1px rgb(199, 233, 255);
 }
 
-.submittweetbutton:focus {
+.submittweetbtn:focus {
     outline: 0;
 }
