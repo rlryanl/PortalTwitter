@@ -27,12 +27,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="card profilecard" >
+                        <div class="profilecard">
                             <div class="profilecardtop"></div>
-                            <div class="card-body">
-                                <a class="card-title profilelink" href="">Steve Mcgee</a>
+                            <img class="profilepic" src="/images/pain.png" />
+                            <div class="profilebody">
+                                <a class="profilelink" href="">Steve Mcgee</a>
                                 <br>
-                                <a class="card-title profilelink" href="">@mcgee</a>
+                                <a class="profilehandle" href="">@mcgee</a>
                                 <div class="row profilecounter">
                                     <div class="col-6">
                                         <a class="tweetslink" href="">Tweets<br>6</a>
@@ -44,22 +45,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7 ">
+                    <div class="col-md-7 ">
                         <div class="writetweetcontainer">
-                            <textarea class="writetweetsection" rows="2" placeholder="Write something!"></textarea>
-                            <button class="submittweetbutton" type="submit">Tweet</button>
+                            <div class="tweeteditpiccol">
+                                <img class="tweeteditpic" src="/images/pain.png" />
+                            </div>
+                            <div class="tweettextboxcol">
+                                <textarea class="writetweetsection" rows="2" placeholder=" Write something!"></textarea>
+                                <button class="submittweetbutton" type="submit">Tweet</button>
+                            </div>
                         </div>
                         <div class="tweetsection">
                             <div class="tweetcontainer">
-                                <div class="tweetheader">
-                                    <a href="">Steve Mcgee </a>
-                                    <div class="tweethandle">@mcgee</div>
+                                <div class="tweetpiccol">
+                                    <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
                                 </div>
-                                <div class="tweet">Steve Mcgee is a cool guy</div>
+                                <div class="tweetheadercol">
+                                    <div class="tweetheader">
+                                        <a class="tweetusername" href="">Steve Mcgee</a>
+                                        <span> </span>
+                                        <div class="tweethandle">@mcgee</div>
+                                    <div class="tweet">Steve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guy</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-2"></div>
+                    <div class="col-md-2"></div>
                 </div>
             </div>
 <% include homepagefooter %>

@@ -14,7 +14,7 @@ a:hover {
 }
 
 body {
-    background-color: rgb(245, 245, 245);
+    background-color: #e6ecf0 ;
 }
 
 .card {
@@ -27,7 +27,9 @@ body {
 }
 
 .container {
-    margin-left: 150px;
+    padding: 0 0;
+    margin-left: 12%;
+    margin-right: 12%;
     margin-top: 10px;
 }
 
@@ -38,7 +40,8 @@ body {
 }
 
 .navbar-nav {
-    margin-left: 150px;
+    margin-left: 12%;
+    margin-right: 12%
 }
 
 .nav-link {
@@ -51,23 +54,67 @@ body {
     color: #1DA1F2 !important;
 }
 
+.profilebody {
+    background: #FFFFFF;
+    text-align: center;
+    padding-top: 45px;
+}
+
+.profilecard {
+    height: 200px;
+    width: 100%;
+}
+
 .profilecardtop {
     background-color: #1DA1F2;
-    height: 100px; 
+    background-size: 100%;
+    height: 40%; 
+}
+
+.profilehandle {
+    color: rgb(115, 115, 115);
+}
+
+.profilehandle:hover {
+    color: #1DA1F2;
+    text-decoration: none;
 }
 
 .profilelink {
     color: black;
+    font-weight: 600;
     text-align: center;
+}
+
+.profilelink:hover {
+    color: inherit;
+}
+
+.profilepic {
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, 0%);
+    position: absolute;
 }
 
 .tweetcontainer {
     background-color: rgb(255, 255, 255);
-    padding: 10px 10px;
+    border: 1px solid #e6ecf0;
+    padding-right: 10px;
+    padding-top: 10px;
 }
 
 .tweetheader {
     margin-bottom: 5px;
+}
+
+.tweetheadercol {
+    display: inline-block;
+    width: 86%;
 }
 
 .followerslink {
@@ -78,26 +125,99 @@ body {
     color: rgb(115, 115, 115);
 }
 
+.tweetslink:hover {
+    text-decoration: none;
+}
+
+.tweetpic {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin: 0 50%; 
+    transform: translate(-50%, 0);
+}
+
+.tweeteditpic {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin: 0 50%; 
+    transform: translate(-50%, 0);
+}
+
+.tweettextboxcol {
+    display: inline-block;
+    width: 86%;
+}
+
+.tweeteditpiccol {
+    float: left;
+    width: 13%;
+}
+
+.tweetpiccol {
+    float: left;
+    width: 13%;
+}
+
+.tweetusername {
+    font-weight: 600;
+}
+
+.tweetusername:hover {
+    color: #1DA1F2;
+    text-decoration-color: #1DA1F2;
+}
+
+.followerslink:hover {
+    text-decoration: none;
+}
+
 .tweethandle {
     color: rgb(115, 115, 115);
     display: inline;
 }
 
 .writetweetcontainer {
-    background-color: rgb(155, 217, 255);
+    background-color: #E8F5FD;
+    border: 1px solid #e6ecf0;
     height: 110px;
-    margin-bottom: 10px;
-    padding: 8px;
+    margin-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
 }
 
 .writetweetsection {
     border-radius: 5px;
+    border: 1px solid #e6ecf0;
     resize: none;
     width: 100%;
 }
 
-.writetweetsection:
+::placeholder {
+    color: #1DA1F2;
+}
 
 .submittweetbutton {
     float: right;
+    background-color: rgb(91, 189, 250);
+    border: solid 1px rgb(122, 204, 255);
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    height: 32px;
+    margin: 0 5px;
+    width: 65px;
+}
+
+.submittweetbutton:hover {
+    cursor: pointer;
+    background-color: rgb(136, 209, 255);
+    border: solid 1px rgb(199, 233, 255);
+}
+
+.submittweetbutton:focus {
+    outline: 0;
 }
