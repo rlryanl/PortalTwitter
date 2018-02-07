@@ -229,8 +229,25 @@ body {
     position: absolute;
 }
 
+.followerslink {
+    color: rgb(115, 115, 115);
+}
+
+.tweetslink {
+    color: rgb(115, 115, 115);
+}
+
+.tweetslink:hover {
+    text-decoration: none;
+}
+
+.followerslink:hover {
+    text-decoration: none;
+}
+
 /* */
 
+/* Tweet Styling */
 .tweetcontainer {
     background-color: rgb(255, 255, 255);
     border: 1px solid #e6ecf0;
@@ -246,18 +263,6 @@ body {
 .tweetheadercol {
     display: inline-block;
     width: 86%;
-}
-
-.followerslink {
-    color: rgb(115, 115, 115);
-}
-
-.tweetslink {
-    color: rgb(115, 115, 115);
-}
-
-.tweetslink:hover {
-    text-decoration: none;
 }
 
 .tweetpic {
@@ -300,15 +305,14 @@ body {
     text-decoration-color: #1DA1F2;
 }
 
-.followerslink:hover {
-    text-decoration: none;
-}
-
-.tweethandle {
+.tweethandledate {
     color: rgb(115, 115, 115);
     display: inline;
 }
 
+/* */
+
+/* Write Tweet Section Styling */
 .writetweetcontainer {
     background-color: #E8F5FD;
     border: 1px solid #e6ecf0;
@@ -352,3 +356,4 @@ body {
 .submittweetbtn:focus {
     outline: 0;
 }
+/* */
