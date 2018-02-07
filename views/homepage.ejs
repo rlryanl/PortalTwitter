@@ -20,6 +20,7 @@
                     </li>
                 </ul>
 
+                <button class="registerbtn" href="#">Register</button>
                 <button class="loginbtn" href="#">Login</button>
                 <!--
                 <form class="form-inline my-2 my-lg-0">
@@ -108,35 +109,91 @@
                 </div>
             </div>
 
-            <div class="modalcontainer hidden">
-                <div class="modalbackground"></div>
+            <div class="modalcontainerlogin hidden">
+                <div class="modalbackgroundlogin"></div>
                 <div class="logincontainer">
-                    <button class="closemodalbtn">X</button>
-                    <form>
+                    <button class="closeloginmodalbtn">X</button>
+                    <form id="loginform">
                         <div class="loginhdng">Login</div><br>
                         <label class="loginhdng2">Username:</label><br>
-                        <input type="username" placeholder="Username" name="username" class="logininput"><br>
+                        <input type="text" placeholder="Username" name="username" class="logininput"><br>
                         <label class="loginhdng2">Password:</label><br>
                         <input type="password" placeholder="Password" name="password" class="logininput"><br>
                         <input type="submit" value="Sign In" class="loginsbmtbtn"><br>
                     </form>
                 </div>
+            </div>
 
+            <div class="modalctnrrgstr hidden">
+                <div class="modalbackgroundrgstr"></div>
+                <div class="registercontainer">
+                    <button class="closergstrmodalbtn">X</button>
+                    <form id="registerform">
+                        <div class="registerhdng">Register</div><br>
+                        <label class="registerhdng2">Username:</label>
+                        <input type="text" placeholder="Username" name="username" class="registerinput"><br>
+                        <label class="registerhdng2">Handle:</label>
+                        <input type="text" placeholder="Handle" name="handle" class="registerinput"><br>
+                        <label class="registerhdng2">Password:</label>
+                        <input type="text" placeholder="First Name" name="firstname" class="registerinput"><br>
+                        <label class="registerhdng2">First Name:</label>
+                        <input type="text" placeholder="Last Name" name="lastname" class="registerinput"><br>
+                        <label class="registerhdng2">Last Name:</label>
+                        <input type="password" placeholder="Password" name="password" class="registerinput"><br>
+                        <input type="submit" value="Sign In" class="registersbmtbtn"><br>
+                    </form>
+                </div>
             </div>
 
             <script>
                 $(document).ready(function() {
                     $('.loginbtn').on('click', function() {
-                        $('.modalcontainer').attr('class', 'modalcontainer');
+                        $('.modalcontainerlogin').attr('class', 'modalcontainerlogin');
                     });
 
-                    $('.modalcontainer').on('click', '.modalbackground', function(event) {
-                        $('.modalcontainer').addClass('hidden');
+                    $('.modalcontainerlogin').on('click', '.modalbackgroundlogin', function(event) {
+                        $('.modalcontainerlogin').addClass('hidden');
                     });
 
-                    $('.closemodalbtn').on('click', function(event) {
-                        $('.modalcontainer').addClass('hidden');
+                    $('.closeloginmodalbtn').on('click', function(event) {
+                        $('.modalcontainerlogin').addClass('hidden');
+                    });
+
+                    $('.registerbtn').on('click', function() {
+                        $('.modalctnrrgstr').attr('class', 'modalctnrrgstr');
+                    });
+
+                    $('.modalctnrrgstr').on('click', '.modalbackgroundrgstr', function(event) {
+                        $('.modalctnrrgstr').addClass('hidden');
+                    });
+
+                    $('.closergstrmodalbtn').on('click', function(event) {
+                        $('.modalctnrrgstr').addClass('hidden');
                     });
                 });
             </script> 
+
+            <script>
+                $(document).ready(function() {
+                    var registerform = $('#registerform');
+
+                    $(registerform).submit(function(event) {
+                        var formData = $(form).serialize();
+                    });
+
+                    $.ajax({
+                        method: 'POST',
+                        url: '/register',
+                        data: formData
+                    })
+
+                    .done(function() {
+                        console.log('YES');
+                    })
+
+                    .fail(function() {
+                        console.log('NO');
+                    })
+                });
+            </script>
 <% include homepagefooter %>

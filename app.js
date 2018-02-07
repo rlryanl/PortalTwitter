@@ -9,6 +9,7 @@ var session = require('client-sessions');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var userModel = require('./models/user');
 
 var app = express();
 
@@ -31,6 +32,34 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Session Handler
+app.use(session({
+  cookieName: 'session',
+  secret: 'asdflasdfs',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  httpOnly:true,
+  secure: true,
+  ephemeral: true
+}));
+
+app.use(function(req, res, next) {
+  if (req.session && req.session.user) {
+      userModel.findOne({username: req.session.user.username}, function(err, user) {
+        if (user) {
+            req.user = user.toObject();
+            delete req.user.password;
+            req.session.user = user;
+            res.locals.user = user;
+        }
+
+        next();
+      });
+  } else {
+    next();
+  }
+});
 
 app.use('/users', users);
 app.use('/', index);
