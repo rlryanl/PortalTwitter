@@ -7,9 +7,13 @@ var session = require('client-sessions');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    tweetModel.find(function(err, tweets) {
-      res.render('homepage', {listTweets: tweets});
-    });
+    if (req.user) {
+        res.redirect(`/${req.user.handle}`);
+    } 
+
+    else {
+      res.render('landingpage');
+    }
 });
 
 router.post('/register', function(req, res) {
@@ -52,4 +56,9 @@ router.post('/login', function(req,res) {
   });
 });
 
+router.get('/:handle', function(req, res) {
+  tweetModel.find({tweethandle: req.params.handle}, function(err, listTweets) {
+    res.render('homepage', listTweets);
+  });
+});
 module.exports = router;
