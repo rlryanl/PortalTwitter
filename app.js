@@ -9,7 +9,8 @@ var session = require('client-sessions');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var userModel = require('./models/user');
+var tweets = require('./routes/tweets');
+var userModel = require('./models/users');
 
 var app = express();
 
@@ -61,6 +62,7 @@ app.use(function(req, res, next) {
   }
 });
 
+app.use('/tweets', tweets);
 app.use('/users', users);
 app.use('/', index);
 

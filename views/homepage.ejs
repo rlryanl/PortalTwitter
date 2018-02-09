@@ -57,52 +57,28 @@
                                 <img class="tweeteditpic" src="/images/pain.png" />
                             </div>
                             <div class="tweettextboxcol">
-                                <textarea class="writetweetsection" rows="2" placeholder=" Write something!"></textarea>
-                                <button class="submittweetbtn" type="submit">Tweet</button>
+                                <form id="tweetform">
+                                    <textarea class="writetweetsection" name="tweet" rows="2" placeholder=" Write something!"></textarea>
+                                    <button class="submittweetbtn" type="submit">Tweet</button>
+                                </form>
                             </div>
                         </div>
-                        <div class="tweetsection">
+                        <div id="tweetsection">
+                            <% for (var i = 0; i < listTweets.length; i++) {%>
                             <div class="tweetcontainer">
                                 <div class="tweetpiccol">
                                     <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
                                 </div>
                                 <div class="tweetheadercol">
                                     <div class="tweetheader">
-                                        <a class="tweetusername" href="">Steve Mcgee</a>
+                                        <a class="tweetusername" href=""><%= listTweets[i].tweetuser %></a>
                                         <span> </span>
-                                        <div class="tweethandledate">@mcgee - Feb 7</div>
-                                        <div class="tweet">Steve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guy</div>
+                                        <div class="tweethandledate">@<%= listTweets[i].tweethandle %> - <%= listTweets[i].tweetdate %></div>
+                                        <div class="tweet"><%= listTweets[i].tweetcontent %></div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="tweetcontainer">
-                                <div class="tweetpiccol">
-                                    <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
-                                </div>
-                                <div class="tweetheadercol">
-                                    <div class="tweetheader">
-                                        <a class="tweetusername" href="">Steve Mcgee</a>
-                                        <span> </span>
-                                        <div class="tweethandledate">@mcgee - Feb 7</div>
-                                        <div class="tweet">Steve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guy</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tweetcontainer">
-                                <div class="tweetpiccol">
-                                    <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
-                                </div>
-                                <div class="tweetheadercol">
-                                    <div class="tweetheader">
-                                        <a class="tweetusername" href="">Steve Mcgee</a>
-                                        <span> </span>
-                                        <div class="tweethandledate">@mcgee - Feb 7</div>
-                                        <div class="tweet">Steve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guySteve Mcgee is a cool guy</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <% } %>
                         </div>
                     </div>
                     <div class="col-md-2"></div>
@@ -135,11 +111,11 @@
                         <label class="registerhdng2">Handle:</label>
                         <input type="text" placeholder="Handle" name="handle" class="registerinput"><br>
                         <label class="registerhdng2">Password:</label>
-                        <input type="text" placeholder="First Name" name="firstname" class="registerinput"><br>
-                        <label class="registerhdng2">First Name:</label>
-                        <input type="text" placeholder="Last Name" name="lastname" class="registerinput"><br>
-                        <label class="registerhdng2">Last Name:</label>
                         <input type="password" placeholder="Password" name="password" class="registerinput"><br>
+                        <label class="registerhdng2">First Name:</label>
+                        <input type="text" placeholder="First Name" name="firstname" class="registerinput"><br>
+                        <label class="registerhdng2">Last Name:</label>
+                        <input type="text" placeholder="Last Name" name="lastname" class="registerinput"><br>
                         <input type="submit" value="Sign In" class="registersbmtbtn"><br>
                     </form>
                 </div>
@@ -178,22 +154,78 @@
                     var registerform = $('#registerform');
 
                     $(registerform).submit(function(event) {
-                        var formData = $(form).serialize();
+                        var formData = $(registerform).serialize();
+
+                        $.ajax({
+                            method: 'POST',
+                            url: '/register',
+                            data: formData
+                        })
+
+                        .done(function() {
+                            $('.modalctnrrgstr').addClass('hidden');
+                        })
+
+                        event.preventDefault();
                     });
+                });
 
-                    $.ajax({
-                        method: 'POST',
-                        url: '/register',
-                        data: formData
-                    })
 
-                    .done(function() {
-                        console.log('YES');
-                    })
+            </script>
 
-                    .fail(function() {
-                        console.log('NO');
-                    })
+            <script>
+                $(document).ready(function() {
+                    var loginform = $('#loginform');
+
+                    $(loginform).submit(function(event) {
+                        var formData = $(loginform).serialize();
+
+                        $.ajax({
+                            method: 'POST',
+                            url: '/login',
+                            data: formData
+                        })
+
+                        .done(function () {
+                            $('.modalcontainerlogin').addClass('hidden');
+                        })
+
+                        event.preventDefault();
+                    });
+                });
+            </script>
+
+            <script>
+                $(document).ready(function() {
+                    var tweetform = $('#tweetform');
+
+                    $(tweetform).submit(function(event) {
+                        var formData = $(tweetform).serialize();
+
+                        $.ajax({
+                            method: 'POST',
+                            url: '/tweets',
+                            data: formData
+                        })
+
+                        .done(function(response) {
+                            $('#tweetsection').append(`<div class="tweetcontainer">
+                                                            <div class="tweetpiccol">
+                                                                <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
+                                                            </div>
+                                                            <div class="tweetheadercol">
+                                                                <div class="tweetheader">
+                                                                    <a class="tweetusername" href="">${response.tweetuser}</a>
+                                                                    <span> </span>
+                                                                    <div class="tweethandledate">@${response.tweethandle} - ${response.tweetdate}</div>
+                                                                    <div class="tweet">${response.tweetcontent}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>`);
+                        })
+
+                        event.preventDefault();
+                    });
                 });
             </script>
 <% include homepagefooter %>

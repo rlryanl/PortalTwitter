@@ -2,11 +2,14 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var userModel = require('../models/users');
+var tweetModel = require('../models/tweetmodel');
 var session = require('client-sessions');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('homepage');
+    tweetModel.find(function(err, tweets) {
+      res.render('homepage', {listTweets: tweets});
+    });
 });
 
 router.post('/register', function(req, res) {
