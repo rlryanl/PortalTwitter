@@ -1,0 +1,148 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Helvetica';
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.col1 {
+    background-image: url('/images/twitterphoto.png');
+    background-size: cover;
+    float: left;
+    height: 100%; 
+    width: 50%;
+}
+
+.col2 {
+    float: left;
+    height: 100%;
+    width: 50%;
+}
+
+.introtext {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 2.8;
+    margin-left: 60px;
+    word-spacing: 1px;
+}
+
+.introtextsection{
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+/* Login Section */
+
+#logincntnr {
+    margin: 40px auto;
+    width: 500px;
+}
+
+.logininput {
+    background-color: rgb(250, 255, 189);
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 3px;
+    font-size: 16px;
+    margin-bottom: 13px;
+    padding: 8px 10px;
+}
+
+.logininput::placeholder {
+    color: rgb(126, 126, 126);
+}
+
+.loginsbmtbtn {
+    background-color: #FFFFFF;
+    border: solid 1px #1DA1F2;
+    border-radius: 10px;
+    color: #1DA1F2;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 5px 0px;
+    margin-left: 10px;
+    padding: 4px 8px;
+
+}
+
+.loginsbmtbtn:hover {
+    cursor: pointer;
+    background-color: rgb(136, 209, 255);
+    border: solid 1px rgb(199, 233, 255);
+}
+
+.loginsbmtbtn:focus {
+    outline: 0;
+}
+
+/* */
+
+/* Register Section */
+.fa-twitter {
+    color: #1DA1F2 !important;
+    font-size: 40px;
+}
+
+#registercntnr {
+    margin: 0 auto;
+    text-align: center;
+    width: 250px;
+} 
+
+.registerhdng {
+    color: #1DA1F2;
+    font-size: 30px;
+}
+
+.registerinput {
+    background-color: rgb(250, 255, 189);
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 3px;
+    font-size: 16px;
+    margin-bottom: 13px;
+    padding: 8px 10px;
+}
+
+.registerinput::placeholder {
+    color: rgb(126, 126, 126);
+}
+
+.registersbmtbtn {
+    background-color: #FFFFFF;
+    border: solid 1px #1DA1F2;
+    border-radius: 10px;
+    color: #1DA1F2;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 8px;
+    padding: 4px 8px;
+
+}
+
+.registersbmtbtn:hover {
+    cursor: pointer;
+    background-color: rgb(136, 209, 255);
+    border: solid 1px rgb(199, 233, 255);
+}
+
+.registersbmtbtn:focus {
+    outline: 0;
+}
+
+.registertextsection {
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    width: 300px;
+}
+
+/* */

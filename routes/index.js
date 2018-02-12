@@ -56,9 +56,19 @@ router.post('/login', function(req,res) {
   });
 });
 
+router.get('/logout', function(req, res) {
+  req.session.reset();
+  res.end();
+});
+
 router.get('/:handle', function(req, res) {
-  tweetModel.find({tweethandle: req.params.handle}, function(err, listTweets) {
-    res.render('homepage', listTweets);
+
+  userModel.findOne({handle: req.params.handle}, function(err, tempuser) {
+    var user = tempuser;
+
+    tweetModel.find({tweethandle: req.params.handle}, function(err, listTweets) {
+      res.render('homepage', {listTweets: listTweets, curruser: req.user, user: user});
+    });
   });
 });
 module.exports = router;

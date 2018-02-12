@@ -112,7 +112,30 @@ body {
 .loginsbmtbtn:focus {
     outline: 0;
 }
+/* */
 
+/* Logout Styling */
+.logoutbtn {
+    background-color: rgb(91, 189, 250);
+    border: solid 1px rgb(122, 204, 255);
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 600;
+    height: 30px;
+    margin-right: 20px;
+    padding: 0px 10px;
+}
+
+.logoutbtn:hover {
+    cursor: pointer;
+    background-color: rgb(136, 209, 255);
+    border: solid 1px rgb(199, 233, 255);
+}
+
+.logoutbtn:focus {
+    outline: 0;
+}
 /* */
 
 /* Register Styling */

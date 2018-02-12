@@ -7,21 +7,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link custom" href="#"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link custom" href="/"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link custom" href="#"><i class="fas fa-bolt"></i> Moments</a>
+                        <a class="nav-link custom" href=""><i class="fas fa-bolt"></i> Your Feed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link custom" href="#"><i class="fas fa-bell"></i> Notifications</a>
+                        <a class="nav-link custom" href=""><i class="fas fa-bell"></i> Notifications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link custom" href="#"><i class="fas fa-envelope"></i> Messages</a>
+                        <a class="nav-link custom" href=""><i class="fas fa-envelope"></i> Messages</a>
                     </li>
                 </ul>
 
-                <button class="registerbtn" href="#">Register</button>
-                <button class="loginbtn" href="#">Login</button>
+                <% if (curruser) { %>
+                    <button class="logoutbtn">Logout</button>
+                <% } else { %>
+                    <button class="registerbtn">Register</button>
+                    <button class="loginbtn">Login</button>
+                <% } %>
                 <!--
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -37,15 +41,15 @@
                             <div class="profilecardtop"></div>
                             <img class="profilepic" src="/images/pain.png" />
                             <div class="profilebody">
-                                <a class="profilelink" href="">Steve Mcgee</a>
+                                <a class="profilelink" href='/<%= user.handle %>'><%= user.firstname%> <%= user.lastname%></a>
                                 <br>
-                                <a class="profilehandle" href="">@mcgee</a>
+                                <a class="profilehandle" href='/<%= user.handle %>'>@<%= user.handle %></a>
                                 <div class="row profilecounter">
                                     <div class="col-6">
-                                        <a class="tweetslink" href="">Tweets<br>6</a>
+                                        <a class="tweetslink" href='/<%= user.handle %>'>Tweets<br><%= listTweets.length %></a>
                                     </div>
                                     <div class="col-6">
-                                        <a class="followerslink" href="">Followers<br>7</a>
+                                        <a class="followerslink" href='/<%= user.handle %>'>Followers<br>7</a>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +68,7 @@
                             </div>
                         </div>
                         <div id="tweetsection">
-                            <% for (var i = 0; i < listTweets.length; i++) {%>
+                            <% for (var i = listTweets.length - 1; i >= 0; i--) {%>
                             <div class="tweetcontainer">
                                 <div class="tweetpiccol">
                                     <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
@@ -146,6 +150,17 @@
                     $('.closergstrmodalbtn').on('click', function(event) {
                         $('.modalctnrrgstr').addClass('hidden');
                     });
+
+                    $('.logoutbtn').on('click', function() {
+                        $.ajax({
+                            method: 'GET',
+                            url: '/logout'
+                        })
+
+                        .done(function (){
+                            location.reload();
+                        })
+                    });
                 });
             </script> 
 
@@ -164,9 +179,8 @@
 
                         .done(function() {
                             $('.modalctnrrgstr').addClass('hidden');
+                            location.reload();
                         })
-
-                        event.preventDefault();
                     });
                 });
 
@@ -188,9 +202,8 @@
 
                         .done(function () {
                             $('.modalcontainerlogin').addClass('hidden');
+                            location.reload();
                         })
-
-                        event.preventDefault();
                     });
                 });
             </script>
@@ -209,7 +222,7 @@
                         })
 
                         .done(function(response) {
-                            $('#tweetsection').append(`<div class="tweetcontainer">
+                            $('#tweetsection').prepend(`<div class="tweetcontainer">
                                                             <div class="tweetpiccol">
                                                                 <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
                                                             </div>

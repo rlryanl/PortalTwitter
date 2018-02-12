@@ -1,0 +1,68 @@
+<% include landingpageheader %>
+        <div class='col1'>
+            <div class='introtextsection'>
+                <span class='introtext'><i class="fas fa-search"></i> Wow this website looks cool!</span>
+                <br> 
+                <span class='introtext'><i class="fas fa-users"></i> I've seen this before somewhere.</span>
+                <br>
+                <span class='introtext'><i class="fas fa-comment"></i> Hmmmmm...</span>
+            </div>
+        </div>
+        <div class='col2'>
+            <form id='logincntnr'>
+                <input type='text' placeholder='Username' name='username' class='logininput'>
+                <input type='password' placeholder='Password' name='password' class='logininput'>
+                <input type="submit" value="Log In" class="loginsbmtbtn">
+            </form>
+            <div class='registertextsection'>
+                <i class="fab fa-twitter"></i><br>
+                If you don't have an account,<br>
+                sign up today!
+            </div>
+            <form id='registercntnr'>
+                <div class="registerhdng">Register</div><br>
+                <input type="text" placeholder="Username" name="username" class="registerinput"><br>
+                <input type="text" placeholder="Handle" name="handle" class="registerinput"><br>
+                <input type="password" placeholder="Password" name="password" class="registerinput"><br>
+                <input type="text" placeholder="First Name" name="firstname" class="registerinput"><br>
+                <input type="text" placeholder="Last Name" name="lastname" class="registerinput"><br>
+                <input type="submit" value="Get Started" class="registersbmtbtn"><br>
+            </form>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                var registerform = $('#registercntnr');
+
+                $(registerform).submit(function(event) {
+                    var formData = $(registerform).serialize();
+
+                    $.ajax({
+                        method: 'POST',
+                        url: '/register',
+                        data: formData
+                    })
+
+                    location.reload();
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                var loginform = $('#logincntnr');
+
+                $(loginform).submit(function(event) {
+                    var formData = $(loginform).serialize();
+
+                    $.ajax({
+                        method: 'POST',
+                        url: '/login',
+                        data: formData
+                    })
+
+                    location.reload();
+                });
+
+            });
+        </script>
+<% include footer %>
