@@ -16,6 +16,20 @@ router.get('/', function(req, res) {
     }
 });
 
+router.get('/tweetfeed', function(req, res) {
+  if (req.user) {
+    userModel.findOne({username: req.user.username}, function(err, user) {
+      tweetModel.find({tweethandle: {$in: user.followers}}, function(err, listTweets) {
+        res.render('tweetfeed', {listTweets: listTweets, curruser: req.user, user: user, followers: req.user.followers});
+      });
+    });
+  }
+
+  else {
+    res.redirect('/');
+  }
+});
+
 router.post('/register', function(req, res) {
   var newUser = new userModel({
     username: req.body.username,
@@ -62,10 +76,7 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/:handle', function(req, res) {
-
-  userModel.findOne({handle: req.params.handle}, function(err, tempuser) {
-    var user = tempuser;
-
+  userModel.findOne({handle: req.params.handle}, function(err, user) {
     tweetModel.find({tweethandle: req.params.handle}, function(err, listTweets) {
       res.render('homepage', {listTweets: listTweets, curruser: req.user, user: user});
     });

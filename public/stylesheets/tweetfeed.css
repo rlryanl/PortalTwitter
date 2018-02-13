@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 * {
     font-family: 'Helvetica';
 }
@@ -30,6 +32,13 @@ body {
     margin-right: 12%;
     margin-top: 10px;
 }
+
+/* Tweet Feed Styling */
+.feedheading {
+    font-size: 30px;
+    text-align: center;
+}
+/* */
 
 /* Login Styling */
 .loginbtn {
@@ -366,30 +375,6 @@ body {
     top: 40px;
     transform: translate(-50%, 0%);
     position: absolute;
-}
-
-.followbtn {
-    float: right;
-    background-color: rgb(91, 189, 250);
-    border: solid 1px rgb(122, 204, 255);
-    border-radius: 20px;
-    color: #FFFFFF;
-    font-size: 14px;
-    font-weight: 600;
-    height: 32px;
-    margin-right: 15px;
-    margin-top: 10px;
-    width: 65px;
-}
-
-.followbtn:hover {
-    cursor: pointer;
-    background-color: rgb(136, 209, 255);
-    border: solid 1px rgb(199, 233, 255);
-}
-
-.followbtn:focus {
-    outline: 0;
 }
 
 .followerslink {

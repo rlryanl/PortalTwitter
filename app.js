@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('client-sessions');
 
+var config = require('./config');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var tweets = require('./routes/tweets');
@@ -35,15 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Session Handler
-app.use(session({
-  cookieName: 'session',
-  secret: 'asdflasdfs',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
-  httpOnly:true,
-  secure: true,
-  ephemeral: true
-}));
+app.use(session(config));
 
 app.use(function(req, res, next) {
   if (req.session && req.session.user) {

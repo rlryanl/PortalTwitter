@@ -6,7 +6,8 @@ var schema = mongoose.Schema({
     password: {type: String, required: true},
     firstname: {type: String, required: true},
     lastname: {type: String, required: true},
-    tweets: {type: [], "default": []}
+    tweets: {type: [], "default": []},
+    followers: {type: [],  "default": []}
 });
 
 var model = mongoose.model('users', schema);

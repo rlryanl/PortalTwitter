@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var userModel = require('../models/users');
 var tweetModel = require('../models/tweetmodel');
-var io = require('../io').instance();
+var io = require('../io');
 
  function getDateTime() {
 
@@ -31,6 +32,15 @@ router.post('/', function(req, res) {
         tweetdate: getDateTime()
     });
 
+    userModel.findOneAndUpdate(
+        {handle: req.user.handle},
+        {$push: {tweets: newTweet}},
+        function(err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+
     newTweet.save(function(err, tweet) {
         if (err) {
             console.log(err);
@@ -38,25 +48,12 @@ router.post('/', function(req, res) {
         }
 
         else {
+            io.instance().to(`${req.user.handle}`).emit('tweet', 
+                {tweet: newTweet});
+            console.log(io.instance());
             res.send(tweet);
         }
     });
 });
-/*
-    router.post('/', function(req, res) {
-        pweetModel.create({
-            ...
-        })
-        .then(function(pweet) {
-            Broadcast to socket listener
-            io.instance().emit('newPweet', {data: pweet.toObject() })
-            res.status(201).json(pweet);
 
-        })
-        .catch(function(err) {
-            Handle errors
-            res.status(500).send(err);
-        })
-    });
-*/
 module.exports = router;

@@ -10,7 +10,7 @@
                         <a class="nav-link custom" href="/"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link custom" href=""><i class="fas fa-bolt"></i> Your Feed</a>
+                        <a class="nav-link custom" href="/tweetfeed"><i class="fas fa-bolt"></i> Your Feed</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link custom" href=""><i class="fas fa-bell"></i> Notifications</a>
@@ -40,6 +40,7 @@
                         <div class="profilecard">
                             <div class="profilecardtop"></div>
                             <img class="profilepic" src="/images/pain.png" />
+                            <button class="followbtn" data-userhandle="<%= user.handle %>">Follow</button>
                             <div class="profilebody">
                                 <a class="profilelink" href='/<%= user.handle %>'><%= user.firstname%> <%= user.lastname%></a>
                                 <br>
@@ -49,13 +50,15 @@
                                         <a class="tweetslink" href='/<%= user.handle %>'>Tweets<br><%= listTweets.length %></a>
                                     </div>
                                     <div class="col-6">
-                                        <a class="followerslink" href='/<%= user.handle %>'>Followers<br>7</a>
+                                        <a class="followerslink" href='/<%= user.handle %>'>Followers<br><%= user.followers.length %></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-7 ">
+                        <% if (typeof curruser != 'undefined') {%>
+                            <% if (curruser.handle == user.handle) { %> 
                         <div class="writetweetcontainer">
                             <div class="tweeteditpiccol">
                                 <img class="tweeteditpic" src="/images/pain.png" />
@@ -67,6 +70,9 @@
                                 </form>
                             </div>
                         </div>
+                            <% } %>
+                        <% } %>
+
                         <div id="tweetsection">
                             <% for (var i = listTweets.length - 1; i >= 0; i--) {%>
                             <div class="tweetcontainer">
@@ -75,7 +81,7 @@
                                 </div>
                                 <div class="tweetheadercol">
                                     <div class="tweetheader">
-                                        <a class="tweetusername" href=""><%= listTweets[i].tweetuser %></a>
+                                        <a class="tweetusername" href="/<%= listTweets[i].tweethandle %>"><%= listTweets[i].tweetuser %></a>
                                         <span> </span>
                                         <div class="tweethandledate">@<%= listTweets[i].tweethandle %> - <%= listTweets[i].tweetdate %></div>
                                         <div class="tweet"><%= listTweets[i].tweetcontent %></div>
@@ -158,6 +164,19 @@
                         })
 
                         .done(function (){
+                            location.reload();
+                        })
+                    });
+
+                    $('.followbtn').on('click', function() {
+                        var handle = $(this).attr('data-userhandle');
+
+                        $.ajax({
+                            method: 'POST',
+                            url: `/users/follow/${handle}`
+                        })
+
+                        .done(function() {
                             location.reload();
                         })
                     });

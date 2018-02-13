@@ -1,0 +1,134 @@
+<% include tweetfeedheader %>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link custom" href="/"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom" href=""><i class="fas fa-bolt"></i> Your Feed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom" href=""><i class="fas fa-bell"></i> Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom" href=""><i class="fas fa-envelope"></i> Messages</a>
+                    </li>
+                </ul>
+
+                <% if (curruser) { %>
+                    <button class="logoutbtn">Logout</button>
+                <% } else { %>
+                    <button class="registerbtn">Register</button>
+                    <button class="loginbtn">Login</button>
+                <% } %>
+                <!--
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                -->
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="profilecard" data-user='<%= followers%>'>
+                            <div class="profilecardtop"></div>
+                            <img class="profilepic" src="/images/pain.png" />
+                            <div class="profilebody">
+                                <a class="profilelink" href='/<%= user.handle %>'><%= user.firstname%> <%= user.lastname%></a>
+                                <br>
+                                <a class="profilehandle" href='/<%= user.handle %>'>@<%= user.handle %></a>
+                                <div class="row profilecounter">
+                                    <div class="col-6">
+                                        <a class="tweetslink" href='/<%= user.handle %>'>Tweets<br><%= user.tweets.length %></a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="followerslink" href='/<%= user.handle %>'>Followers<br><%= user.followers.length %></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 ">
+                        <h1 class="feedheading">Your Feed</h1>
+                        <div id="tweetsection">
+                            <% for (var i = listTweets.length - 1; i >= 0; i--) {%>
+                            <div class="tweetcontainer">
+                                <div class="tweetpiccol">
+                                    <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
+                                </div>
+                                <div class="tweetheadercol">
+                                    <div class="tweetheader">
+                                        <a class="tweetusername" href="/<%= listTweets[i].tweethandle %>"><%= listTweets[i].tweetuser %></a>
+                                        <span> </span>
+                                        <div class="tweethandledate">@<%= listTweets[i].tweethandle %> - <%= listTweets[i].tweetdate %></div>
+                                        <div class="tweet"><%= listTweets[i].tweetcontent %></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+            <div class="modalcontainerlogin hidden">
+                <div class="modalbackgroundlogin"></div>
+                <div class="logincontainer">
+                    <button class="closeloginmodalbtn">X</button>
+                    <form id="loginform">
+                        <div class="loginhdng">Login</div><br>
+                        <label class="loginhdng2">Username:</label><br>
+                        <input type="text" placeholder="Username" name="username" class="logininput"><br>
+                        <label class="loginhdng2">Password:</label><br>
+                        <input type="password" placeholder="Password" name="password" class="logininput"><br>
+                        <input type="submit" value="Sign In" class="loginsbmtbtn"><br>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modalctnrrgstr hidden">
+                <div class="modalbackgroundrgstr"></div>
+                <div class="registercontainer">
+                    <button class="closergstrmodalbtn">X</button>
+                    <form id="registerform">
+                        <div class="registerhdng">Register</div><br>
+                        <label class="registerhdng2">Username:</label>
+                        <input type="text" placeholder="Username" name="username" class="registerinput"><br>
+                        <label class="registerhdng2">Handle:</label>
+                        <input type="text" placeholder="Handle" name="handle" class="registerinput"><br>
+                        <label class="registerhdng2">Password:</label>
+                        <input type="password" placeholder="Password" name="password" class="registerinput"><br>
+                        <label class="registerhdng2">First Name:</label>
+                        <input type="text" placeholder="First Name" name="firstname" class="registerinput"><br>
+                        <label class="registerhdng2">Last Name:</label>
+                        <input type="text" placeholder="Last Name" name="lastname" class="registerinput"><br>
+                        <input type="submit" value="Sign In" class="registersbmtbtn"><br>
+                    </form>
+                </div>
+            </div>
+
+            <% var user = user %>
+
+            <script>
+                $(document).ready(function() {
+                    $('.logoutbtn').on('click', function() {
+                        $.ajax({
+                            method: 'GET',
+                            url: '/logout'
+                        })
+
+                        .done(function (){
+                            location.reload();
+                        })
+                    });
+                });
+            </script>
+<% include tweetfeedfooter %>
