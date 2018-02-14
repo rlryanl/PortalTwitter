@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class='col2'>
-            <form id='logincntnr'>
+            <form id='logincntnr' method="POST" action="/login" >
                 <input type='text' placeholder='Username' name='username' class='logininput'>
                 <input type='password' placeholder='Password' name='password' class='logininput'>
                 <input type="submit" value="Log In" class="loginsbmtbtn">
@@ -19,7 +19,7 @@
                 If you don't have an account,<br>
                 sign up today!
             </div>
-            <form id='registercntnr'>
+            <form id='registercntnr' method="POST" action="/register">
                 <div class="registerhdng">Register</div><br>
                 <input type="text" placeholder="Username" name="username" class="registerinput"><br>
                 <input type="text" placeholder="Handle" name="handle" class="registerinput"><br>
@@ -29,40 +29,4 @@
                 <input type="submit" value="Get Started" class="registersbmtbtn"><br>
             </form>
         </div>
-
-        <script>
-            $(document).ready(function() {
-                var registerform = $('#registercntnr');
-
-                $(registerform).submit(function(event) {
-                    var formData = $(registerform).serialize();
-
-                    $.ajax({
-                        method: 'POST',
-                        url: '/register',
-                        data: formData
-                    })
-
-                    window.location.href('/');
-                });
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                var loginform = $('#logincntnr');
-
-                $(loginform).submit(function(event) {
-                    var formData = $(loginform).serialize();
-
-                    $.ajax({
-                        method: 'POST',
-                        url: '/login',
-                        data: formData
-                    })
-
-                    window.location.href('/');
-                });
-
-            });
-        </script>
 <% include footer %>

@@ -39,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(config));
 
 app.use(function(req, res, next) {
+  console.log(req.session);
   if (req.session && req.session.user) {
       userModel.findOne({username: req.session.user.username}, function(err, user) {
         if (user) {

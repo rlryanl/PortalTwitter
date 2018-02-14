@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var userModel = require('../models/users');
 var tweetModel = require('../models/tweetmodel');
 var session = require('client-sessions');
+var bcrypt = require('bcrypt');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -31,44 +32,58 @@ router.get('/tweetfeed', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-  var newUser = new userModel({
-    username: req.body.username,
-    handle: req.body.handle,
-    password: req.body.password,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-  });
+  const saltRounds = 10;
+  const plainTextP = req.body.password;
 
-  newUser.save(function(err, user) {
-    if (err) {
-      console.log(err);
-      res.end();
-    }
+  bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(plainTextP, salt, function(err, hash) {
+      var newUser = new userModel({
+        username: req.body.username,
+        handle: req.body.handle,
+        password: hash,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+      });
 
-    else {
-      req.session.user = user;
-      res.end();
-    }
+      newUser.save(function(err, user) {
+        if (err) {
+          console.log(err);
+          res.redirect('/');
+        }
+
+        else {
+          req.session.user = user;
+          res.redirect('/');
+        }
+      });
+    });
   });
 });
 
 router.post('/login', function(req,res) {
-  userModel.findOne({username: req.body.username, password: req.body.password}, function(err, user) {
+  var user;
+  userModel.findOne({username: req.body.username}, function(err, user) {
     if (err) {
-      console.log("MongoDB Error")
+      console.log("MongoDB Error");
       res.end();
     }
 
     if (user) {
-      req.session.user = user;
-      res.end();
-    }
+      bcrypt.compare(req.body.password, user.password, function(err, result) {
+        if (result) {
+          req.session.user = user.toObject();
+        }
 
+        res.redirect('/');
+      });
+    } 
+    
     else {
-      res.end();
+      res.redirect('/');
     }
   });
 });
+
 
 router.get('/logout', function(req, res) {
   req.session.reset();
@@ -82,4 +97,5 @@ router.get('/:handle', function(req, res) {
     });
   });
 });
+
 module.exports = router;
