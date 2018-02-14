@@ -47,7 +47,7 @@
                                 <a class="profilehandle" href='/<%= user.handle %>'>@<%= user.handle %></a>
                                 <div class="row profilecounter">
                                     <div class="col-6">
-                                        <a class="tweetslink" href='/<%= user.handle %>'>Tweets<br><%= listTweets.length %></a>
+                                        <a class="tweetslink" href='/<%= user.handle %>'>Tweets<br><span id="tweetnum"><%= listTweets.length %></span></a>
                                     </div>
                                     <div class="col-6">
                                         <a class="followerslink" href='/<%= user.handle %>'>Followers<br><%= user.followers.length %></a>
@@ -254,6 +254,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>`);
+
+                            var numTweet = Number($('#tweetnum').text());
+                            $('#tweetnum').html(`${++numTweet}`);
                         })
 
                         event.preventDefault();

@@ -5,12 +5,21 @@
             <script>
               var socket = io();
 
-              var user = $('.profilecard').attr('data-user');
-              user = JSON.stringify(user);
-              user = JSON.parse(user);
-              user = user.split(',');
-
               socket.on('tweet', function(tweet) {
+                tweet = tweet.tweet;
+                $('#tweetsection').prepend(`<div class="tweetcontainer">
+                                                <div class="tweetpiccol">
+                                                    <a href=""><img class="tweetpic" src="/images/pain.png" /></a>
+                                                </div>
+                                                <div class="tweetheadercol">
+                                                    <div class="tweetheader">
+                                                        <a class="tweetusername" href="">${tweet.tweetuser}</a>
+                                                        <span> </span>
+                                                        <div class="tweethandledate">@${tweet.tweethandle} - ${tweet.tweetdate}</div>
+                                                        <div class="tweet">${tweet.tweetcontent}</div>
+                                                    </div>
+                                                </div>
+                                            </div>`);
               });
             </script>
         </body>

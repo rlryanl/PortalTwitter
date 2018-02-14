@@ -13,9 +13,12 @@ var io = require('../io');
     min = (min < 10 ? '0' : '') + min;
  
     var year = date.getFullYear();
- 
-    var month = date.getMonth() + 1;
-    month = (month < 10 ? '0' : '') + month;
+
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+  
+    var month = monthNames[date.getMonth()];
  
     var day  = date.getDate();
     day = (day < 10 ? '0' : '') + day;
@@ -50,7 +53,6 @@ router.post('/', function(req, res) {
         else {
             io.instance().to(`${req.user.handle}`).emit('tweet', 
                 {tweet: newTweet});
-            console.log(io.instance());
             res.send(tweet);
         }
     });

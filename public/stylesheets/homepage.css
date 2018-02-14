@@ -396,11 +396,11 @@ body {
     color: rgb(115, 115, 115);
 }
 
-.tweetslink {
+#tweetslink {
     color: rgb(115, 115, 115);
 }
 
-.tweetslink:hover {
+#tweetslink:hover {
     text-decoration: none;
 }
 
