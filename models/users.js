@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var schema = mongoose.Schema({
     username: {type: String, unique: true, required: true},
@@ -9,6 +10,10 @@ var schema = mongoose.Schema({
     tweets: {type: [], "default": []},
     followers: {type: [],  "default": []}
 });
+
+schema.methods.checkPassword = function (password) {
+    return bcrypt.compare(this.password, password);
+}
 
 var model = mongoose.model('users', schema);
 

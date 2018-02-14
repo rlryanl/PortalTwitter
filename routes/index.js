@@ -40,7 +40,7 @@ router.post('/register', function(req, res) {
       var newUser = new userModel({
         username: req.body.username,
         handle: req.body.handle,
-        password: hash,
+        password: hash, // usersModel.hashPassword(req.body.password)
         firstname: req.body.firstname,
         lastname: req.body.lastname,
       });
@@ -61,7 +61,6 @@ router.post('/register', function(req, res) {
 });
 
 router.post('/login', function(req,res) {
-  var user;
   userModel.findOne({username: req.body.username}, function(err, user) {
     if (err) {
       console.log("MongoDB Error");
@@ -69,6 +68,15 @@ router.post('/login', function(req,res) {
     }
 
     if (user) {
+      user.checkPassword(req.body.login_password)
+        .then(function(result) {
+
+        })
+        .catch(function(err) {
+          console.error(err);
+          res.status(500).send(err);
+        })
+
       bcrypt.compare(req.body.password, user.password, function(err, result) {
         if (result) {
           req.session.user = user.toObject();
