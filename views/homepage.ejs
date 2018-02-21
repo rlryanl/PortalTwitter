@@ -20,18 +20,17 @@
                     </li>
                 </ul>
 
+                <form id="searchform">
+                    <input id="usersearch" type="search" name="searchinput" placeholder ="Search">
+                    <button type="submit" id="searchbtn"><i class="fas fa-search"></i></button>
+                </form>
+
                 <% if (curruser) { %>
                     <button class="logoutbtn">Logout</button>
                 <% } else { %>
                     <button class="registerbtn">Register</button>
                     <button class="loginbtn">Login</button>
                 <% } %>
-                <!--
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                -->
                 </div>
             </nav>
             <div class="container">
@@ -40,7 +39,13 @@
                         <div class="profilecard">
                             <div class="profilecardtop"></div>
                             <img class="profilepic" src="/images/pain.png" />
-                            <button class="followbtn" data-userhandle="<%= user.handle %>">Follow</button>
+                            <% if (curruser) { %>
+                                <% if (curruser.followers.indexOf(user.handle) >= 0) { %>
+                                    <button id="unfollowbtn" data-userhandle="<%= user.handle %>">Unfollow</button>
+                                <% }} else { %>
+                                    <button id="followbtn" data-userhandle="<%= user.handle %>">Follow</button>
+                            <% } %>
+                        
                             <div class="profilebody">
                                 <a class="profilelink" href='/<%= user.handle %>'><%= user.firstname%> <%= user.lastname%></a>
                                 <br>
@@ -168,7 +173,7 @@
                         })
                     });
 
-                    $('.followbtn').on('click', function() {
+                    $('#followbtn').on('click', function() {
                         var handle = $(this).attr('data-userhandle');
 
                         $.ajax({
@@ -180,8 +185,48 @@
                             location.reload();
                         })
                     });
+
+                    $('#unfollowbtn').on('click', function() {
+                        var handle = $(this).attr('data-userhandle');
+
+                        $.ajax({
+                            method: 'POST',
+                            url: `/users/unfollow/${handle}`
+                        })
+
+                        .done(function() {
+                            location.reload();
+                        })
+                    });
                 });
             </script> 
+            
+            <script>
+                $(document).ready(function() {
+                    var registerform = $('#registerform');
+
+                    $.ajax({
+                        method: 'GET',
+                        url: '/users/list'
+                    })
+
+                    .done(function(response) {
+
+                        $('#usersearch').autocomplete({
+                            source: response
+                        });
+                    })
+
+                    var searchform = $('#searchform');
+
+                    $(searchform).submit(function(event) {
+                        var searchArr = searchform.serializeArray();
+                        var profile = searchArr[0].value;
+                        window.location.href = `/${profile}`;
+                        event.preventDefault();
+                    });
+                });
+            </script>
 
             <script>
                 $(document).ready(function() {
@@ -198,7 +243,6 @@
 
                         .done(function() {
                             $('.modalctnrrgstr').addClass('hidden');
-                            location.reload();
                         })
                     });
                 });
@@ -221,7 +265,6 @@
 
                         .done(function () {
                             $('.modalcontainerlogin').addClass('hidden');
-                            location.reload();
                         })
                     });
                 });

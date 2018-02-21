@@ -32,31 +32,24 @@ router.get('/tweetfeed', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-  const saltRounds = 10;
-  const plainTextP = req.body.password;
+  var newUser = new userModel({
+    username: req.body.username,
+    handle: req.body.handle,
+    password: userModel.genPassword(req.body.password), 
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+  });
 
-  bcrypt.genSalt(saltRounds, function(err, salt) {
-    bcrypt.hash(plainTextP, salt, function(err, hash) {
-      var newUser = new userModel({
-        username: req.body.username,
-        handle: req.body.handle,
-        password: hash, // usersModel.hashPassword(req.body.password)
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-      });
+  newUser.save(function(err, user) {
+    if (err) {
+      console.log(err);
+      res.redirect('/');
+    }
 
-      newUser.save(function(err, user) {
-        if (err) {
-          console.log(err);
-          res.redirect('/');
-        }
-
-        else {
-          req.session.user = user;
-          res.redirect('/');
-        }
-      });
-    });
+    else {
+      req.session.user = user;
+      res.redirect('/');
+    }
   });
 });
 
@@ -68,22 +61,11 @@ router.post('/login', function(req,res) {
     }
 
     if (user) {
-      user.checkPassword(req.body.login_password)
-        .then(function(result) {
-
-        })
-        .catch(function(err) {
-          console.error(err);
-          res.status(500).send(err);
-        })
-
-      bcrypt.compare(req.body.password, user.password, function(err, result) {
-        if (result) {
+        if (userModel.checkPassword(req.body.password, user.password)) {
           req.session.user = user.toObject();
         }
 
         res.redirect('/');
-      });
     } 
     
     else {
@@ -92,7 +74,6 @@ router.post('/login', function(req,res) {
   });
 });
 
-
 router.get('/logout', function(req, res) {
   req.session.reset();
   res.end();
@@ -100,9 +81,15 @@ router.get('/logout', function(req, res) {
 
 router.get('/:handle', function(req, res) {
   userModel.findOne({handle: req.params.handle}, function(err, user) {
-    tweetModel.find({tweethandle: req.params.handle}, function(err, listTweets) {
-      res.render('homepage', {listTweets: listTweets, curruser: req.user, user: user});
-    });
+    if (user) {
+      tweetModel.find({tweethandle: req.params.handle}, function(err, listTweets) {
+        res.render('homepage', {listTweets: listTweets, curruser: req.user, user: user});
+      });
+    }
+ 
+    else {
+      res.redirect('/');
+    }
   });
 });
 

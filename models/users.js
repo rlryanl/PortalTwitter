@@ -11,8 +11,17 @@ var schema = mongoose.Schema({
     followers: {type: [],  "default": []}
 });
 
-schema.methods.checkPassword = function (password) {
-    return bcrypt.compare(this.password, password);
+schema.statics.checkPassword = function (plainP, hashedP) {
+    return bcrypt.compareSync(plainP, hashedP, function(err, result) {
+        return result;
+    });
+}
+
+schema.statics.genPassword = function (password) {
+    const saltRounds = 10;
+    var hash = bcrypt.hashSync(password, saltRounds);
+
+    return hash;
 }
 
 var model = mongoose.model('users', schema);
